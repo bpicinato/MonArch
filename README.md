@@ -1,5 +1,4 @@
-# MonArch
-An automated pipeline to annotate circRNAs in prokaryotic RNA-Seq data.
+# MonArch: an automated pipeline to annotate circRNAs in prokaryotic RNA-Seq data
 
 If you use the contents of this repository, please cite:
 ```
