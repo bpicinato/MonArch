@@ -31,13 +31,13 @@ join_path() {
 # usage function
 usage() {
 echo -e "
-Monarch-Seq
-Automated pipeline to find circular RNAs using Circ-Seq reads
-----------------------------------------------------------------
+MonArch
+Automated pipeline to annotate circular RNAs in RNA-Seq data
+------------------------------------------------------------------------------
 
 \e[4mUsage\e[0m:
 
- Monarch-Seq.sh --ref_genome <reference.fasta> --reads <reads1.fasta,reads2.fasta>
+ monarch.sh --ref_genome <reference.fasta> --reads <reads1.fasta,reads2.fasta>
                 --output <path/to/output> [--threads INT]
                [--prefix STR] [--max_circle_size INT]
                [--min_sec_hit_size INT] [--min_read_cov FLOAT]
@@ -56,23 +56,23 @@ Automated pipeline to find circular RNAs using Circ-Seq reads
 
  --threads             Number of threads for the analysis (Default = 10)
 
- --prefix              Prefix for files created by Monarch-Seq (Default = circles)
+ --prefix              Prefix for files created by MonArch (Default = circles)
 
  --max_circle_size     Maximum circle size (Default = 3500)
 
  --min_sec_hit_size    Minimum size of the second hit (Default = 8)
 
- --min_read_cov        Minimum read coveraged by first and second hits together.
-                       Must be number between 0 and 1 (0 - 100%) (Default = 0.9)
+ --min_read_cov        Minimum read coverage by first and second hits together.
+                       Must be  number between 0 and 1 (0 - 100%) (Default = 0.9)
 
  --max_mismatch        Maximum number of mismatches allowed for each alignment
                        (Default = 0)
 
- --no_strandness        Do not consider sequencing protocol stranded. Monarch-Seq
+ --no_strandness        Do not consider sequencing protocol stranded. MonArch
                        default behavior is to consider sequencing protocol stranded.
                        This paramenter overrides --dont_invert_strand.
 
- --dont_invert_strand  Do not invert input strand. Default behavior of Monarch-Seq
+ --dont_invert_strand  Do not invert input strand. Default behavior of MonArch
                        is to turn 'plus' strand turns into 'minus' and vice versa.
                        Depending on the sequencing protocol one might not want this.
 "
@@ -186,10 +186,10 @@ if [ -z "${REF_GENOME}" ] || [ -z "${READS}" ] || [ -z "${OUTPUT}" ]; then
         error_exit "ERROR: Please, supply required arguments correctly."
 fi
 
-# Starting Monarch-Seq
+# Starting MonArch
 echo "=========================================================================
-                           Monarch-Seq (v$VERSION)
-      Automated pipeline to find circular RNAs using Circ-Seq reads
+                           MonArch (v$VERSION)
+        Automated pipeline to annotate circular RNAs in RNA-Seq data
 -------------------------------------------------------------------------
 REFERENCE GENOME: $REF_GENOME
 READS: $READS
