@@ -1,11 +1,10 @@
 # MonArch: an automated pipeline to annotate circRNAs in prokaryotic RNA-Seq data
 
-MonArch was developed to annotate circRNAs from RNA-Seq (.fa files) data using the premise of 
+MonArch is an automated pipeline to annotate circRNAs in RNA-Seq reads. It searches for circRNA signatures (the chiastic alignment of the two halves of the read) in the reads and then group close junctions into one circRNA.
 
 If you use the contents of this repository, please cite:
-```
-citation
-```
+
+Picinato, B. A., Franceschini-Santos, V. H., Zaramela, L., Vêncio, R. Z. N., Koide, T. (2025) **Archaea express circular isoforms of IS200/IS605-associated ωRNAs**. In press.
 
 # Instalation and requisites
 
@@ -91,15 +90,7 @@ Optional arguments:
 MonArch was developed to analyze prokaryotic RNA-Seq data and was successfully tested with multiple archaeal datasets and genomes. Even though its premise of finding circularization junctions is not specific to prokaryotes, MonArch might be too slow to deal with large eukaryotic datasets and genomes. This is because 1) it uses Blast to align the RNA-Seq reads to the reference genome; and 2) the post-processing scripts are not optimized for very large datasets. This could be partly mitigated by first aligning the raw RNA-Seq reads to the reference genome with another aligner tool (such as HISAT, Bowtie, TopHat) and then using the **non-aligned reads** (where the circularization junction reads should be) as input for MonArch to reduce the input size. This approach was tested with _H. salinarum_ RNA-Seq data and yielded similar results as when the raw RNA-Seq reads were used. Both approaches resulted in the same annotated circRNAs, with the raw reads resulting in more reads supporting each circRNA.
 
 ## Paired-end sequencing
-MonArch exclusively searches for the circularization junction sequence on the input reads. It does not benefit from paired-end sequencing information when the R1 and R2 reads are each on a different side of the junction and can indicate circularization. When using paired-end sequencing data with MonArch, you can group the R1 and R2 reads in one FASTA file and use it as input. If you wish to _quantify_ circRNAs with paired-end sequencing data, be aware that, in a small circRNA, both R1 and R2 reads could contain the circularization junction sequence and the circRNA will be counted twice. The X and Y outputs possuem informação de quais reads x junções vieram.
-
-# Contact information
-If you find a bug or error using MonArch, please report it using the repository "Issues" tab.
-If you need other information, you can email:
-- beatriz [dot] picinato [at] usp [dot] br
-- tkoide
-- rvencio
-- vinicius
+MonArch exclusively searches for the circularization junction sequence on the input reads. It does not benefit from paired-end sequencing information when the R1 and R2 reads are each on a different side of the junction and can indicate circularization. When using paired-end sequencing data with MonArch, you can group the R1 and R2 reads in one FASTA file and use it as input. If you wish to _quantify_ circRNAs with paired-end sequencing data, be aware that, in a small circRNA, both R1 and R2 reads could contain the circularization junction sequence and the circRNA will be counted twice. The X and Y outputs possuem informação de quais reads x junções vieram. **should R2 reads be inverted?**
 
 # License
 
