@@ -52,7 +52,7 @@ Required arguments:
   --reads              Reads to be used as the query for blast. Or a comma-separated
                        list of reads, if applicable.
 
-  --output             Path to output directory. Will be created if it does not exist.
+  --output             Path to output directory. It will be created if it does not exist.
 
 Optional arguments:
 
@@ -80,7 +80,20 @@ Optional arguments:
 ```
 
 # Outputs
-- details of the outputs
+MonArch outputs can be divided into three categories: alignment results (Blastn results), junction results (regarding circularization junctions before joining into ensembles), and ensemble results (final results after ensemble formation). 
+
+## blastn.tbl
+Blastn standard tab-delimited output compressed by gzip. Columns are: sseqid, qseqid, qlen, length, qstart, qend, sstart, send, sstrand, mismatch. You can learn more about it with the [Blastn documentation](https://www.ncbi.nlm.nih.gov/books/NBK279684/), section "Options for the command-line applications".
+
+## junctions.info
+
+## junctions.bed
+
+## ensembles.full
+
+## ensembles.simple
+
+## ensembles.bed
 
 # The Pipeline
 - figure
