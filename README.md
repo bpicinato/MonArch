@@ -32,7 +32,7 @@ An example of a minimal command to call MonArch is:
 bash monarch.sh --ref_genome Hsalinarum.fa --reads trat1.fa --output output_dir
 ```
 
-Below is a list of all possible arguments; please be aware of the default behavior for the optional parameters and check if they fit your analysis. The `-h` or `--help` arguments can show this help message on the command line interface.
+Below is a list of all possible arguments; please take notice of the default behavior for the optional parameters and check if they fit your analysis. The `-h` or `--help` arguments show this help message on the command line interface.
 ```
                                    MonArch
          Automated pipeline to annotate circular RNAs in RNA-Seq data
@@ -87,7 +87,7 @@ Optional arguments:
 - figure
 
 # Known issues
-## Large genomes/datasets limitation
+## Large genomes/datasets
 MonArch was developed to analyze prokaryotic RNA-Seq data and was successfully tested with multiple archaeal datasets and genomes. Even though its premise of finding circularization junctions is not specific to prokaryotes, MonArch might be too slow to deal with large eukaryotic datasets and genomes. This is because 1) it uses Blast to align the RNA-Seq reads to the reference genome; and 2) the post-processing scripts are not optimized for very large datasets. This could be partly mitigated by first aligning the raw RNA-Seq reads to the reference genome with another aligner tool (such as HISAT, Bowtie, TopHat) and then using the **non-aligned reads** (where the circularization junction reads should be) as input for MonArch to reduce the input size. This approach was tested with _H. salinarum_ RNA-Seq data and yielded similar results as when the raw RNA-Seq reads were used. Both approaches resulted in the same annotated circRNAs, with the raw reads resulting in more reads supporting each circRNA.
 
 ## Paired-end sequencing
