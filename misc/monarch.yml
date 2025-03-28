@@ -1,4 +1,4 @@
-name: 
+name: monarch
 channels:
 - bioconda
 - conda-forge
