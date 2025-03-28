@@ -24,7 +24,7 @@ conda activate monarch
 If you do not want to use Conda to install all the requisites (**not recommended**), below is a list of all the dependencies of MonArch. Be aware that you might need to change how they are called in the main `monarch.sh` script since it assumes that the dependencies were installed with Conda. The versions listed are the ones used in MonArch; other versions of the dependencies might work, but they were not tested.
 
 - Python v=3.10
-- Python libraries
+- Python packages
   - sys 
   - os
   - BioPython
