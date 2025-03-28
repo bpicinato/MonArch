@@ -9,8 +9,18 @@ citation
 - detais on the command and input formats
 
 # Instalation and requisites
-- conda installation
-- list of requisites if someone wants to install by themselves (not recommended)
+
+We recommend using [Conda](https://docs.conda.io/en/latest/) for installing all MonArch dependencies. We provided a `.yml` file in the `misc` directory with all the dependencies. Go to the MonArch directory and create the enviroment with the dependencies with:
+```
+conda env create -f misc/monarch.yml
+```
+Before running MonArch, activate the enviroment with:
+```
+conda activate monarch
+```
+
+If you do not want to use Conda to install all the requisites (**not recommended**), below is a list of all the dependencies of MonArch. Be aware tat you might need to change how the programs are called in the main monarch.sh script since it assumes that the dependencies were installed with Conda.
+
 
 # Outputs
 - details of the outputs
