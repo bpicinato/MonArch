@@ -10,7 +10,9 @@ citation
 
 # Instalation and requisites
 
-We recommend using [Conda](https://docs.conda.io/en/latest/) for installing all MonArch dependencies. We provided a `.yml` file in the `misc` directory with all the dependencies. Go to the MonArch directory and create the enviroment with the dependencies with:
+MonArch was developed and tested on Ubuntu distributions.
+
+We recommend using [Conda](https://docs.conda.io/en/latest/) for installing all MonArch dependencies. We provided a `.yml` file in the `misc` directory with all the dependencies. Navigate to the MonArch directory and create the enviroment with the dependencies with:
 ```
 conda env create -f misc/monarch.yml
 ```
@@ -19,8 +21,16 @@ Before running MonArch, activate the enviroment with:
 conda activate monarch
 ```
 
-If you do not want to use Conda to install all the requisites (**not recommended**), below is a list of all the dependencies of MonArch. Be aware tat you might need to change how the programs are called in the main monarch.sh script since it assumes that the dependencies were installed with Conda.
+If you do not want to use Conda to install all the requisites (**not recommended**), below is a list of all the dependencies of MonArch. Be aware that you might need to change how they are called in the main `monarch.sh` script since it assumes that the dependencies were installed with Conda. The versions listed are the ones used in MonArch; other versions of the dependencies might work, but they were not tested.
 
+- Python v=3.10
+- Python libraries
+  - sys 
+  - os
+  - BioPython
+  - datetime 
+- Blast v=2.10.1
+- GNU Parallel v=20160822
 
 # Outputs
 - details of the outputs
