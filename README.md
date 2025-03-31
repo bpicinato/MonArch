@@ -8,7 +8,7 @@ Picinato, B. A., Franceschini-Santos, V. H., Zaramela, L., Vêncio, R. Z. N., Ko
 
 # Instalation and requisites
 
-MonArch was developed and tested on Ubuntu distributions.
+MonArch was developed and tested on Ubuntu.
 
 To use MonArch, download the git repository on your machine.
 
@@ -80,20 +80,19 @@ Optional arguments:
 ```
 
 # Outputs
-MonArch outputs can be divided into three categories: alignment results (Blastn results), junction results (regarding circularization junctions before joining into ensembles), and ensemble results (final results after ensemble formation). 
+MonArch outputs can be divided into three categories: alignment results (Blastn results), junction results (regarding circularization junctions before joining into ensembles), and ensemble results (final results after ensemble formation). See [The Pipeline](#the-pipeline) section. The most useful files for downstream analysis are the .bed.
 
-## blastn.tbl
-Blastn standard tab-delimited output compressed by gzip. Columns are: sseqid, qseqid, qlen, length, qstart, qend, sstart, send, sstrand, mismatch. You can learn more about it with the [Blastn documentation](https://www.ncbi.nlm.nih.gov/books/NBK279684/), section "Options for the command-line applications".
+- **blastn.tbl**: Blastn standard tab-delimited output compressed by gzip. Columns are: sseqid, qseqid, qlen, length, qstart, qend, sstart, send, sstrand, mismatch. You can learn more about it with the [Blastn documentation](https://www.ncbi.nlm.nih.gov/books/NBK279684/), section "Options for the command-line applications".
 
-## junctions.info
+- **junctions.info**: Tab-delimited file with information on every junction found. Each line contains information on one read that contained a circularization junction. Columns are: chromosome ID, read name, strand, anchor alignment half (A/B, see [The Pipeline](#the-pipeline)), how many "second hits" were found, overlap value (values -3 to 3), start of the anchor alignment on the read, _end of the anchor alignment on the read_, _start of the second alingment on the read_, end of the second alingment on the read, start of the anchor alignment on the genome, _end of the anchor alignment on the genome_, _start of the second alingment on the genome_, end of the second alingment on the genome. The highlighted coordinate columns are the ones used to determine circRNA coordinates. 	
 
-## junctions.bed
+- **junctions.bed**: Standard [BED](https://en.wikipedia.org/wiki/BED_(file_format)) file in which the score column contains information on the overlap value (VALUE MUST BE 0-100 - see what to do, if we want to explain our 100 flag system or not).
 
-## ensembles.full
+- **ensembles.simple**: 
 
-## ensembles.simple
+- **ensembles.full**: 
 
-## ensembles.bed
+- **ensembles.bed**: 
 
 # The Pipeline
 - figure
