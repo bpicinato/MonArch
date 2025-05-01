@@ -104,7 +104,6 @@ eval set -- "$OPTS"
 
 # set arguments initial values
 THREADS=10
-DELTA=3
 MAX_CIRCLE_SIZE=3500
 MIN_READ_COV=0.9
 PREFIX="circles"
@@ -113,6 +112,7 @@ INVERT_STRAND="YES"
 STRANDNESS="YES"
 # hard-coded
 MIN_SEC_HIT_SIZE=8
+DELTA=3
 
 # extract options and their arguments into variables.
 while true ; do
