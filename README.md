@@ -32,7 +32,7 @@ An example of a minimal command to call MonArch is:
 bash monarch.sh --ref_genome Hsalinarum.fa --reads trat1.fa --output output_dir
 ```
 
-Below is a list of all possible arguments; please take notice of the default behavior for the optional parameters and check if they fit your analysis. The `-h` or `--help` arguments show this help message on the command line interface.
+Below is a list of all possible arguments; please take notice of the default behavior for the optional parameters and verify that they fit your analysis. The `-h` or `--help` arguments show this help message on the command-line interface.
 ```
                                    MonArch
          Automated pipeline to annotate circular RNAs in RNA-Seq data
@@ -91,11 +91,11 @@ MonArch outputs can be divided into three categories: 1) alignment results (BLAS
 
 #### 1. blastn.tbl
 
-BLASTn standard tab-delimited output compressed by gzip. Columsn are:
+BLASTn standard tab-delimited output compressed by gzip. Columns are:
 ```
 sseqid  qseqid  qlen  length  qstart  qend  sstart  send  sstrand  mismatch
 ```
-You can learn more about their meaning with the [BLAST documentation](https://www.ncbi.nlm.nih.gov/books/NBK279684/), section "Options for the command-line applications".
+You can learn more about them with the [BLAST documentation](https://www.ncbi.nlm.nih.gov/books/NBK279684/).
 
 #### 2. junctions.info
 
@@ -103,7 +103,7 @@ Tab-delimited file with information on every junction found. Each line contains 
 ```
 chromosomeID read_name	strand	anchor_half	scond_hit_count	overlap_value	read_start1	read_end1*	read_start2*	read_end2	genome_start1	genome_end1*	genome_start2*	genome_end2
 ```
-"1" start and end coordinates are of the anchor of the alignment pair, and "2" are from the second alignment. The highlighted coordinate columns with an "*" are the ones used to determine circRNA coordinates in the next processing steps. 	
+"1" start and end coordinates are of the anchor of the alignment pair, and "2" are from the second alignment. The highlighted coordinate columns with an "*" are the ones used to determine circRNA coordinates in the subsequent processing steps. 	
 
 #### 3. junctions.bed
 
@@ -111,15 +111,15 @@ Standard [BED](https://en.wikipedia.org/wiki/BED_(file_format)) file in which th
 
 #### 4. ensembles.simple
 
-Tab-delimited file with a simplified list of the circRNA _ensebles_ annotated; each line represents an individual circRNA _ensemble_. Columns are:
+Tab-delimited file with a simplified list of the circRNA _ensembles_ annotated; each line represents an individual circRNA _ensemble_. Columns are:
 ```
 ensemble_ID	chr	start	end	strand	flag97	flag98	flag99	flag100	flag101	flag102	flag103
 ```
-The last 6 columns contain how many junctions of each type are present in the ensemble (see the "flag" explanttion in the [junctions.bed](#3-junctionsbed) section).
+The last 6 columns contain how many junctions of each type are present in the ensemble (see the "flag" explanation in the [junctions.bed](#3-junctionsbed) section).
 
 #### 5. ensembles.full
 
-Tab-delimited file with detailed information on each read/junction that comprises the circRNA ensembles. Each contrains information about a single circRNA in the ensemble, including its junction sequence. Columns are:
+Tab-delimited file with detailed information on each read/junction that comprises the circRNA ensembles. Each contains information about a single circRNA in the ensemble, including its junction sequence. Columns are:
 ```
 ensemble_ID  chr  start   end  read_ID  overlap_flag  strand  read_sequence  circRNA_length  halfA_sequence  halfB_sequence  empirical_junction_sequence  real_junction_sequence  circRNA_sequence 
 ```
@@ -139,7 +139,7 @@ empirical vs real junctions
 
 ## Large genomes/datasets
 
-MonArch was developed to analyze prokaryotic RNA-Seq data and was successfully tested with multiple archaeal datasets and genomes. Although its premise of finding circularization junctions is not specific to prokaryotes, MonArch might be too slow to handle large eukaryotic datasets and genomes. This is because 1) it uses Blast to align the RNA-Seq reads to the reference genome, and 2) the post-processing scripts are not optimized for very large datasets. This could be partly mitigated by first aligning the raw RNA-Seq reads to the reference genome with another aligner tool (such as HISAT, Bowtie, TopHat) and then using the **non-aligned reads** (where the circularization junction reads should be) as input for MonArch to reduce the input size. This approach was tested with _H. salinarum_ RNA-Seq data and yielded similar results as when the raw RNA-Seq reads were used. Both approaches resulted in the same annotated circRNAs, with the raw reads resulting in more reads supporting each circRNA.
+MonArch was developed to analyze prokaryotic RNA-Seq data and was successfully tested with multiple archaeal datasets and genomes. Although its premise of finding circularization junctions is not specific to prokaryotes, MonArch might be too slow to handle large eukaryotic datasets and genomes. This is because 1) it uses BLAST to align the RNA-Seq reads to the reference genome, and 2) the post-processing scripts are not optimized for very large datasets. This could be partly mitigated by first aligning the raw RNA-Seq reads to the reference genome with another aligner tool (such as HISAT, Bowtie, TopHat) and then using the **non-aligned reads** (where the circularization junction reads should be) as input for MonArch to reduce the input size. This approach was tested with _H. salinarum_ RNA-Seq data and yielded similar results as when the raw RNA-Seq reads were used. Both approaches resulted in the same annotated circRNAs, with the raw reads resulting in more reads supporting each circRNA.
 
 ## Paired-end sequencing
 
