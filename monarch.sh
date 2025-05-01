@@ -282,9 +282,7 @@ fi
 
 if [[ ! -f "$OUTPUT"/"$PREFIX".junctions.info && ! -f "$OUTPUT"/"$PREFIX".blastn.tbl.gz ]]; then
 	log "Step5" "Merging files\n"
-	#cat ${OUTPUT}/*.fa.out | gzip > "$OUTPUT"/"$PREFIX".blastn.tbl.gz
  	find "$OUTPUT" -name "*.fa.out" -exec cat '{}' \+ | pigz -p $THREADS > "$OUTPUT"/"$PREFIX".blastn.tbl.gz
-	#cat ${OUTPUT}/*out.bed > "$OUTPUT"/"$PREFIX".junctions.bed
  	find "$OUTPUT" -name "*out.bed" -exec cat '{}' \+ > "$OUTPUT"/"$PREFIX".junctions.bed
 	find "$OUTPUT" -name "*.fa.out.info" -exec cat '{}' \+ >> "$OUTPUT"/"$PREFIX".junctions.info
 	DONEmsg "Step5"
