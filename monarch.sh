@@ -289,7 +289,7 @@ if [[ ! -f "$OUTPUT"/"$PREFIX".junctions.info && ! -f "$OUTPUT"/"$PREFIX".blastn
         #echo -e "#ReadName\tStrand\tHalf\tSecHitCount\tOverlap\
 #\tReadStart1\tReadEnd1*\tReadStart2*\tReadEnd2\
 #\tGenomeStart1\tGenomeEnd1*\tGenomeStart2*\tGenomeEnd2" \
-        > "$OUTPUT"/"$PREFIX".junctions.info
+        #> "$OUTPUT"/"$PREFIX".junctions.info
         #cat ${OUTPUT}/*.fa.out.info >> "$OUTPUT"/"$PREFIX".junctions.info
 	find "$OUTPUT" -name "*.fa.out.info" -exec cat '{}' \+ >> "$OUTPUT"/"$PREFIX".junctions.info
 	DONEmsg "Step5"
