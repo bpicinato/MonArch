@@ -286,12 +286,6 @@ if [[ ! -f "$OUTPUT"/"$PREFIX".junctions.info && ! -f "$OUTPUT"/"$PREFIX".blastn
  	find "$OUTPUT" -name "*.fa.out" -exec cat '{}' \+ | pigz -p $THREADS > "$OUTPUT"/"$PREFIX".blastn.tbl.gz
 	#cat ${OUTPUT}/*out.bed > "$OUTPUT"/"$PREFIX".junctions.bed
  	find "$OUTPUT" -name "*out.bed" -exec cat '{}' \+ > "$OUTPUT"/"$PREFIX".junctions.bed
-        #echo -e "#ReadName\tStrand\tHalf\tSecHitCount\tOverlap\
-#\tReadStart1\tReadEnd1*\tReadStart2*\tReadEnd2\
-#\tGenomeStart1\tGenomeEnd1*\tGenomeStart2*\tGenomeEnd2" \
-        #> "$OUTPUT"/"$PREFIX".junctions.info
-        #cat ${OUTPUT}/*.fa.out.info >> "$OUTPUT"/"$PREFIX".junctions.info
-	touch "$OUTPUT"/"$PREFIX".junctions.info
 	find "$OUTPUT" -name "*.fa.out.info" -exec cat '{}' \+ >> "$OUTPUT"/"$PREFIX".junctions.info
 	DONEmsg "Step5"
 else
@@ -316,7 +310,6 @@ if [ ! -f "$OUTPUT"/"$PREFIX".junctions.sorted_for_ensembles ]; then
                 # replace 'minus' with '+' and 'plus' with '-'
                 cat "$OUTPUT"/"$PREFIX".junctions.info | \
                         sed 's/minus/+/g;s/plus/-/g' | \
-                        #tail -n +2 | 
 			sed 's/\t/franceschini-santos/g' > $INFOTMP
                 N_FILES=$(wc -l < $INFOTMP)
                 while read -r LINE; do
@@ -333,7 +326,6 @@ if [ ! -f "$OUTPUT"/"$PREFIX".junctions.sorted_for_ensembles ]; then
                 # replace 'minus' with '-' and 'plus' with '+'
                 cat "$OUTPUT"/"$PREFIX".junctions.info | \
                         sed 's/plus/+/g;s/minus/-/g' | \
-                        #tail -n +2 | 
 			sed 's/\t/franceschini-santos/g' > $INFOTMP
                 N_FILES=$(wc -l < $INFOTMP)
                 while read -r LINE; do
