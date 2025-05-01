@@ -40,8 +40,8 @@ Automated pipeline to annotate circular RNAs in RNA-Seq data
  monarch.sh --ref_genome <reference.fasta> --reads <reads1.fasta,reads2.fasta>
                 --output <path/to/output> [--threads INT]
                [--prefix STR] [--max_circle_size INT]
-               [--min_sec_hit_size INT] [--min_read_cov FLOAT]
-               [--max_mismatch INT] [--no_strandness] [--dont_invert_strand]
+               [--min_read_cov FLOAT] [--max_mismatch INT]
+               [--no_strandness] [--dont_invert_strand]
 
 \e[4mRequired arguments\e[0m:
 
@@ -59,8 +59,6 @@ Automated pipeline to annotate circular RNAs in RNA-Seq data
  --prefix              Prefix for files created by MonArch (Default = circles)
 
  --max_circle_size     Maximum circle size (Default = 3500)
-
- --min_sec_hit_size    Minimum size of the second hit (Default = 8)
 
  --min_read_cov        Minimum read coverage by first and second hits together.
                        Must be  number between 0 and 1 (0 - 100%) (Default = 0.9)
@@ -111,9 +109,10 @@ MAX_CIRCLE_SIZE=3500
 MIN_READ_COV=0.9
 PREFIX="circles"
 MAX_MISMATCH=0
-MIN_SEC_HIT_SIZE=8
 INVERT_STRAND="YES"
 STRANDNESS="YES"
+# hard-coded
+MIN_SEC_HIT_SIZE=8
 
 # extract options and their arguments into variables.
 while true ; do
@@ -135,10 +134,6 @@ while true ; do
       ;;
     --max_circle_size )
       MAX_CIRCLE_SIZE="$2"
-      shift 2
-      ;;
-    --min_sec_hit_size )
-      MIN_SEC_HIT_SIZE="$2"
       shift 2
       ;;
     --output )
@@ -199,7 +194,6 @@ THREADS: $THREADS
 MAX CIRCLE SIZE: $MAX_CIRCLE_SIZE
 MIN READ COVERAGE: $MIN_READ_COV
 MAX MISMATCH ALLOWED: $MAX_MISMATCH
-MIN SECOND HIT SIZE: $MIN_SEC_HIT_SIZE
 STRANDED PROTOCOL: $STRANDNESS
 INVERT STRAND? $INVERT_STRAND
 =========================================================================
