@@ -286,9 +286,9 @@ if [[ ! -f "$OUTPUT"/"$PREFIX".junctions.info && ! -f "$OUTPUT"/"$PREFIX".blastn
  	find "$OUTPUT" -name "*.fa.out" -exec cat '{}' \+ | pigz -p $THREADS > "$OUTPUT"/"$PREFIX".blastn.tbl.gz
 	#cat ${OUTPUT}/*out.bed > "$OUTPUT"/"$PREFIX".junctions.bed
  	find "$OUTPUT" -name "*out.bed" -exec cat '{}' \+ > "$OUTPUT"/"$PREFIX".junctions.bed
-        echo -e "#ReadName\tStrand\tHalf\tSecHitCount\tOverlap\
-\tReadStart1\tReadEnd1*\tReadStart2*\tReadEnd2\
-\tGenomeStart1\tGenomeEnd1*\tGenomeStart2*\tGenomeEnd2" \
+        #echo -e "#ReadName\tStrand\tHalf\tSecHitCount\tOverlap\
+#\tReadStart1\tReadEnd1*\tReadStart2*\tReadEnd2\
+#\tGenomeStart1\tGenomeEnd1*\tGenomeStart2*\tGenomeEnd2" \
         > "$OUTPUT"/"$PREFIX".junctions.info
         #cat ${OUTPUT}/*.fa.out.info >> "$OUTPUT"/"$PREFIX".junctions.info
 	find "$OUTPUT" -name "*.fa.out.info" -exec cat '{}' \+ >> "$OUTPUT"/"$PREFIX".junctions.info
