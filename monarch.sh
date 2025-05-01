@@ -291,6 +291,7 @@ if [[ ! -f "$OUTPUT"/"$PREFIX".junctions.info && ! -f "$OUTPUT"/"$PREFIX".blastn
 #\tGenomeStart1\tGenomeEnd1*\tGenomeStart2*\tGenomeEnd2" \
         #> "$OUTPUT"/"$PREFIX".junctions.info
         #cat ${OUTPUT}/*.fa.out.info >> "$OUTPUT"/"$PREFIX".junctions.info
+	touch "$OUTPUT"/"$PREFIX".junctions.info
 	find "$OUTPUT" -name "*.fa.out.info" -exec cat '{}' \+ >> "$OUTPUT"/"$PREFIX".junctions.info
 	DONEmsg "Step5"
 else
