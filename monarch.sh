@@ -316,7 +316,8 @@ if [ ! -f "$OUTPUT"/"$PREFIX".junctions.sorted_for_ensembles ]; then
                 # replace 'minus' with '+' and 'plus' with '-'
                 cat "$OUTPUT"/"$PREFIX".junctions.info | \
                         sed 's/minus/+/g;s/plus/-/g' | \
-                        tail -n +2 | sed 's/\t/franceschini-santos/g' > $INFOTMP
+                        #tail -n +2 | 
+			sed 's/\t/franceschini-santos/g' > $INFOTMP
                 N_FILES=$(wc -l < $INFOTMP)
                 while read -r LINE; do
                         $CONDA_PREFIX/bin/sem --will-cite --id $$ --max-procs \
@@ -332,7 +333,8 @@ if [ ! -f "$OUTPUT"/"$PREFIX".junctions.sorted_for_ensembles ]; then
                 # replace 'minus' with '-' and 'plus' with '+'
                 cat "$OUTPUT"/"$PREFIX".junctions.info | \
                         sed 's/plus/+/g;s/minus/-/g' | \
-                        tail -n +2 | sed 's/\t/franceschini-santos/g' > $INFOTMP
+                        #tail -n +2 | 
+			sed 's/\t/franceschini-santos/g' > $INFOTMP
                 N_FILES=$(wc -l < $INFOTMP)
                 while read -r LINE; do
                         $CONDA_PREFIX/bin/sem --will-cite --id $$ --max-procs \
