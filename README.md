@@ -133,9 +133,9 @@ empirical vs real junctions
 
 # The Pipeline
 
+file:///home/bpicinato/Documents/Doutorado/circRNAs/paper/figuras_v2/Figure1/Figure1.png
 
 # Known issues
-file:///home/bpicinato/Documents/Doutorado/circRNAs/paper/figuras_v2/Figure1/Figure1.pdf
 
 ## Large genomes/datasets
 
