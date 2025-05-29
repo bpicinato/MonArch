@@ -1,12 +1,12 @@
 # MonArch: an automated pipeline to annotate circRNAs in prokaryotic RNA-Seq data
 
-MonArch is an automated pipeline to annotate circRNAs in RNA-Seq reads. It searches for circRNA signatures (the chiastic alignment of the two halves of the read) in the reads and then group close junctions into one circRNA.
+MonArch is an automated pipeline to annotate circRNAs in RNA-Seq reads. It searches for circRNA signatures (the chiastic alignment of the two halves of the read) in the reads and then groups close junctions into one circRNA.
 
 If you use the contents of this repository, please cite:
 
-Picinato, B. A., Franceschini-Santos, V. H., Zaramela, L., Vêncio, R. Z. N., Koide, T. (2025) **Archaea express circular isoforms of IS200/IS605-associated ωRNAs**. In preparation.
+Picinato, B. A., Franceschini-Santos, V. H., Zaramela, L., Vêncio, R. Z. N., Koide, T. (2025) **Archaea express circular isoforms of IS200/IS605-associated ωRNAs**. Submitted.
 
-# Instalation and requisites
+# Installation and requisites
 
 MonArch was developed and tested on Ubuntu.
 
@@ -87,7 +87,7 @@ monarch --ref_genome --reads
 
 # Outputs
 
-MonArch outputs can be divided into three categories: 1) alignment results (BLASTn results), 2) junction results (regarding circularization junctions before joining into ensembles), and 3) ensemble results (final results after ensemble formation - see [The Pipeline](#the-pipeline) section). 
+MonArch outputs can be divided into three categories: 1) alignment results (BLASTn results), 2) junction results (regarding circularization junctions before joining into _ensembles_), and 3) _ensemble_ results (final results after _ensemble_ formation - see [The Pipeline](#the-pipeline)). 
 
 #### 1. blastn.tbl
 
@@ -119,7 +119,7 @@ The last 6 columns contain how many junctions of each type are present in the en
 
 #### 5. ensembles.full
 
-Tab-delimited file with detailed information on each read/junction that comprises the circRNA ensembles. Each contains information about a single circRNA in the ensemble, including its junction sequence. Columns are:
+Tab-delimited file with detailed information on each read/junction that comprises the circRNA _ensembles_. Each contains information about a single circRNA in the ensemble, including its junction sequence. Columns are:
 ```
 ensemble_ID  chr  start   end  read_ID  overlap_flag  strand  read_sequence  circRNA_length  halfA_sequence  halfB_sequence  empirical_junction_sequence  real_junction_sequence  circRNA_sequence 
 ```
@@ -133,7 +133,17 @@ empirical vs real junctions
 
 # The Pipeline
 
-file:///home/bpicinato/Documents/Doutorado/circRNAs/paper/figuras_v2/Figure1/Figure1.png
+MonArch can be divided into two main parts: (1) identification of individual circularization junctions in the reads and (2) grouping similar junctions into circRNA _ensembles_ (Figure 1).
+
+![pipeline](https://github.com/user-attachments/assets/880b9e75-3bca-44fe-a3ec-958ec0e8383f)
+***Figure 1**: Schematic of the MonArch pipeline. First, it aligns the input RNA-Seq reads in the provided reference genome using BLASTn and searches for reads with a chiastic alignment that came from a circularization junction. MonArch then groups close annotated circRNA junctions into one entity, a circRNA _ensemble_ (CircEnse).*
+
+In the first step, the reads are aligned to the reference genome with BLASTn. Then, `MonArch-GetJunctions.py` searches for a pair of alignments from the same read that could represent a circularization junction to annotate it. Many of the input options affect this step (Figure 2A). We allow alignments to have at most a 3nt overlap or gap between them (Figure 2B). An overlap occurs when a base in the circularization junction can be aligned to the reference genome by either alignment of the pair, while a gap occurs when a base in the circularization junction does not align with the reference genome. The coordinates of the circularization junction are adjusted accordingly.
+
+![FigureS1-1](https://github.com/user-attachments/assets/032154cf-1bd4-4ed7-8d0e-b6b09840118a)
+***Figure 2**: Details on the MonArch pipeline. (A) Schematic of some MonArch parameters to identify circularization junctions in RNA-Seq reads. (B) Reads that contain a circularization junction are allowed to have at most a 3nt "overlap" or "gap" between the two halves of the alignment. An overlap (left) occurs when a base (N) can be aligned to either side of the transcript. The final circRNA coordinate always considers that the base came from the 5' portion of the circularized transcript. A gap (right) occurs when there is a base (N) between the two portions of the alignment that does not align to the reference genome.*
+
+The post-processing steps merge circularization junctions in _ensembles_ by `MonArch-PostProcessing.py` and get their sequence with `MonArch-GetJunctionsSeq.py`. Circularization junctions are merged into one ensemble if their start and end coordinates are no further than 3nt from the start and end coordinates of junctions that are already part of that _ensemble_. If the option `--no_strandness` is selected, MonArch will not output the junction sequences.
 
 # Known issues
 
