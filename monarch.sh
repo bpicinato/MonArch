@@ -346,7 +346,7 @@ if [ ! -f "$OUTPUT"/"$PREFIX".ensembles.full.readseqs ]; then
 	cat "$OUTPUT"/"$PREFIX".junctions.bed | sort -k1n -k2n -k3n > "$OUTPUT"/"$PREFIX".junctions.sorted_for_ensembles
 
 	# running PostProcessing.py
-        log "Step6" "Running ensembles annotation\n"
+        log "Step6" "Making ensembles\n"
 	"$CONDA_PREFIX"/bin/python3 "$HOME_DIR"/scripts/Monarch-PostProcessing.py \
 		"$OUTPUT"/"$PREFIX".junctions.sorted_for_ensembles "$OUTPUT" \
 		"$PREFIX" "$cat_treated"
@@ -355,6 +355,17 @@ if [ ! -f "$OUTPUT"/"$PREFIX".ensembles.full.readseqs ]; then
 		| awk -v OFS="\t" '{$5=$1"__"$5; print $0 }' \
 		>> "$OUTPUT"/"$PREFIX".ensembles.full
         # Adding transcript and junction sequences to junctions.seqs file
+
+else
+	warn "Step6" "Ensembles already done. Skipping..."
+fi
+
+if [ ! -f "$OUTPUT"/"$PREFIX".ensembles.bed ]; then
+
+	# making ensemble BED file
+        log "Step6" "Making ensembles BED file\n"
+        awk -v OFS="\t" -v FS="\t" ' {$6=$6+$7+$8+$9+$10+$11+$12}{print $2,$3,$4,$5,$1,$6}' \
+        "$OUTPUT"/"$PREFIX".ensembles.simple > "$OUTPUT"/"$PREFIX".ensembles.bed
 
         echo ""
         DONEmsg "Step6"
