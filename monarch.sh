@@ -351,11 +351,6 @@ if [ ! -f "$OUTPUT"/"$PREFIX".ensembles.full.readseqs ]; then
 		"$OUTPUT"/"$PREFIX".junctions.sorted_for_ensembles "$OUTPUT" \
 		"$PREFIX" "$cat_treated"
 	# writing temp ensemble ID to files .full
-	#cat "$OUTPUT"/"$PREFIX".ensembles.full.readnames.tmp \
-		#| awk -v OFS="\t" '{ print $1,$2,$3,$4,$1"__"$5,$6,$7,$8,$9,$10 }' \
-		#> "$OUTPUT"/"$PREFIX".ensembles.full.readnames
-        echo -ne "#CircEnse\tChr\tStart\tEnd\tReadID\tFlag\tStrand\tReadSeq\tTranscriptSize\
-\tHalfA\tHalfB\tEmpiricalJunction\tReadlJunction\tTranscript\n" > "$OUTPUT"/"$PREFIX".ensembles.full
 	cat "$OUTPUT"/"$PREFIX".ensembles.full.readseqs.tmp \
 		| awk -v OFS="\t" '{$5=$1"__"$5; print $0 }' \
 		>> "$OUTPUT"/"$PREFIX".ensembles.full
