@@ -191,9 +191,9 @@ def GetEnsembles(input, full, transcript_seqs=False,
 
 def PrintEnsemblesSimple(Ensembles, ens_simple):
     with open(ens_simple, 'a') as out:
-        out.write('\t'.join(['#read', 'chr', 'start', 'end', 'strand',
-                                'flag97', 'flag98', 'flag99', 'flag100',
-                                'flag101', 'flag102', 'flag103', '\n']))
+        #out.write('\t'.join(['#read', 'chr', 'start', 'end', 'strand',
+        #                        'flag97', 'flag98', 'flag99', 'flag100',
+        #                        'flag101', 'flag102', 'flag103', '\n']))
         for k, v in Ensembles.items():
             for field in [str(x) for x in v.values()]:
                 if 'range' not in field:
