@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION=0.55
+VERSION=1.0
 # Log message function (normal text) with Step
 log() {
         echo -ne "[ $(date +%m-%d-%y" "%H:%M:%S) | $1 ] $2"
@@ -19,9 +19,7 @@ DONEmsg() {
 BYEmsg() {
         echo -e "\033[1;32m[ $(date +%m-%d-%y" "%H:%M:%S) ] ALL DONE!"
         echo -e "
-This is a goodbye message.
-Probably will have citation, mail contact, and more.
-Bye\033[0m"
+\033[0m"
 }
 # thanks, stackoverflow!
 join_path() {
@@ -50,18 +48,18 @@ Automated pipeline to annotate circular RNAs in RNA-Seq data
   --reads              Reads to be used as query for blast. Or a comma separated
                        list of reads, if applicable
 
-  --output             Path to output dir. Will be created if does not exist
+  --output             Path to output dir. Will be created if it does not exist
 
 \e[4mOptional arguments\e[0m:
 
- --threads             Number of threads for the analysis (Default = 10)
+ --threads             Number of threads for the analysis (Default = 1)
 
  --prefix              Prefix for files created by MonArch (Default = circles)
 
  --max_circle_size     Maximum circle size (Default = 3500)
 
  --min_read_cov        Minimum read coverage by first and second hits together.
-                       Must be  number between 0 and 1 (0 - 100%) (Default = 0.9)
+                       Must be a number between 0 and 1 (0 - 100%) (Default = 0.9)
 
  --max_mismatch        Maximum number of mismatches allowed for each alignment
                        (Default = 0)
@@ -99,7 +97,7 @@ if [ $? != 0 ] ; then echo "Failed to parse options...exiting." ; exit 1 ; fi
 eval set -- "$OPTS"
 
 # set arguments initial values
-THREADS=10
+THREADS=1
 MAX_CIRCLE_SIZE=3500
 MIN_READ_COV=0.9
 PREFIX="circles"
