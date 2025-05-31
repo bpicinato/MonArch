@@ -27,11 +27,6 @@ If you do not want to use Conda to install all the requisites (**not recommended
 
 MonArch requires three parameters: a **reference genome** file in FASTA format; a comma-separated list of FASTA files with the **reads** from which circRNAs should be detected; and the **path** to an output directory (it will be created if it does not exist).
 
-An example of a minimal command to call MonArch is:
-```
-bash monarch.sh --ref_genome Hsalinarum.fa --reads trat1.fa --output output_dir
-```
-
 Below is a list of all possible arguments; please take notice of the default behavior for the optional parameters and verify that they fit your analysis. The `-h` or `--help` arguments show this help message on the command-line interface.
 ```
                                    MonArch
@@ -123,13 +118,15 @@ Tab-delimited file with detailed information on each read/junction that comprise
 ```
 ensemble_ID  chr  start   end  read_ID  overlap_flag  strand  read_sequence  circRNA_length  halfA_sequence  halfB_sequence  empirical_junction_sequence  real_junction_sequence  circRNA_sequence 
 ```
-Read name is prefixed with the ensemble ID to which it belongs followed by two underscores: `CircEnse_XXXX__`.
+Read name is prefixed with the ensemble ID to which it belongs, followed by two underscores: `CircEnse_XXXX__`.
 
-what | means; uppercase and lower case in the junction sequences
+Double "vertical bars" (||) show where the junction occurs in junction sequence columns. Lowercase letters in the junction represent a base that was part of an overlap or a gap (see [The Pipeline](#the-pipeline) below). When there are no vertical bars with a lowercase letter in the junction (as the "t" in `CACGGGTCGtAATACCCAA`), the base is from an overlap; when it is between the vertical bars, it is a gap (as the "c" in `CTCCCGCTAC|c|AGCGGGATGG`).
 
-empirical vs real junctions
+"Empirical junction" is the junction sequence present in the read. "Real junction" is the junction as it is in the cell. These sequences will be the same if the sequencing protocol does not sequence the reverse strand.
 
 #### 6. ensembles.bed
+
+Standard [BED](https://en.wikipedia.org/wiki/BED_(file_format)) file for the final _ensemble_ annotation. The score column contains information on how many reads are in that circRNA *ensemble*. 
 
 # The Pipeline
 
@@ -138,7 +135,7 @@ MonArch can be divided into two main parts: (1) identification of individual cir
 ![pipeline](https://github.com/user-attachments/assets/880b9e75-3bca-44fe-a3ec-958ec0e8383f)
 ***Figure 1**: Schematic of the MonArch pipeline. First, it aligns the input RNA-Seq reads in the provided reference genome using BLASTn and searches for reads with a chiastic alignment that came from a circularization junction. MonArch then groups close annotated circRNA junctions into one entity, a circRNA _ensemble_ (CircEnse).*
 
-In the first step, the reads are aligned to the reference genome with BLASTn. Then, `MonArch-GetJunctions.py` searches for a pair of alignments from the same read that could represent a circularization junction to annotate it. Many of the input options affect this step (Figure 2A). The alignments must be uniquely aligned in the genome, have at most `--max_mismatch` mismatches to the reference genome, be no further than `--max_circle_size` bases from each other, and together cover at least `--min_read_cov` of the read. Moreover, the best of the two BLASTn alignments must cover at least half of the read, and the other one should be at least `--min_sec_hit_size` bases long. We allow alignments to have at most a 3nt overlap or gap between them (Figure 2B). An overlap occurs when a base in the circularization junction can be aligned to the reference genome by either alignment of the pair, while a gap occurs when a base in the circularization junction does not align with the reference genome. The coordinates of the circularization junction are adjusted accordingly.
+In the first step, the reads are aligned to the reference genome with BLASTn. Then, `MonArch-GetJunctions.py` searches for a pair of alignments from the same read that could represent a circularization junction to annotate it. Many of the input options affect this step (Figure 2A). The alignments must be uniquely aligned in the genome, have at most `--max_mismatch` mismatches to the reference genome, be no further than `--max_circle_size` bases from each other, and together cover at least `--min_read_cov` of the read. Moreover, the best of the two BLASTn alignments must cover at least half of the read, and the other one should be at least 8 bases long. We allow alignments to have at most a 3nt overlap or gap between them (Figure 2B). An overlap occurs when a base in the circularization junction can be aligned to the reference genome by either alignment of the pair, while a gap occurs when a base in the circularization junction does not align with the reference genome. The coordinates of the circularization junction are adjusted accordingly.
 
 ![FigureS1-1](https://github.com/user-attachments/assets/032154cf-1bd4-4ed7-8d0e-b6b09840118a)
 ***Figure 2**: Details on the MonArch pipeline. (A) Schematic of some MonArch parameters to identify circularization junctions in RNA-Seq reads. Default values are represented. (B) Reads that contain a circularization junction are allowed to have at most a 3nt "overlap" or "gap" between the two halves of the alignment. An overlap (left) occurs when a base (N) can be aligned to either side of the transcript. The final circRNA coordinate always considers that the base came from the 5' portion of the circularized transcript. A gap (right) occurs when there is a base (N) between the two portions of the alignment that does not align to the reference genome.*
