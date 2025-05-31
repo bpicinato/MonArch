@@ -134,7 +134,7 @@ In the first step, the reads are aligned to the reference genome with BLASTn. Th
 ![FigureS1-1](https://github.com/user-attachments/assets/032154cf-1bd4-4ed7-8d0e-b6b09840118a)
 ***Figure 2**: Details on the MonArch pipeline. (A) Schematic of some MonArch parameters to identify circularization junctions in RNA-Seq reads. Default values are represented. (B) Reads that contain a circularization junction are allowed to have at most a 3nt "overlap" or "gap" between the two halves of the alignment. An overlap (left) occurs when a base (N) can be aligned to either side of the transcript. The final circRNA coordinate always considers that the base came from the 5' portion of the circularized transcript. A gap (right) occurs when there is a base (N) between the two portions of the alignment that does not align to the reference genome.*
 
-The post-processing steps merge circularization junctions in _ensembles_ by `MonArch-PostProcessing.py` and get their sequence with `MonArch-GetJunctionsSeq.py`. Circularization junctions are merged into one ensemble if their start and end coordinates are no further than 3nt from the start and end coordinates of junctions that are already part of that _ensemble_.
+The post-processing steps start by getting the junction sequences to write into the `ensembles.full` file with `MonArch-GetJunctionsSeq.py`. Then, individual circRNA junctions are merged into _ensembles_ by `MonArch-PostProcessing.py`. Circularization junctions are merged into one _ensemble_ if their start and end coordinates are no further than 3nt from the start and end coordinates of junctions that are already part of that _ensemble_.
 
 # Known issues
 
