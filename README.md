@@ -122,7 +122,7 @@ Read name is prefixed with the ensemble ID to which it belongs, followed by two 
 
 Double "vertical bars" (||) show where the junction occurs in junction sequence columns. Lowercase letters in the junction represent a base that was part of an overlap or a gap (see [The Pipeline](#the-pipeline) below). When there are no vertical bars with a lowercase letter in the junction (as the "t" in `CACGGGTCGtAATACCCAA`), the base is from an overlap; when it is between the vertical bars, it is a gap (as the "c" in `CTCCCGCTAC|c|AGCGGGATGG`).
 
-"Empirical junction" is the junction sequence present in the read. "Real junction" is the junction as it is in the cell. These sequences will be the same if the sequencing protocol does not sequence the reverse strand.
+"Empirical junction" is the junction sequence present in the read. "Real junction" is the junction as it is in the cell. These sequences will be different if the sequencing protocol uses dUTP (MonArch default behavior), or will be the same if  the `--dont_invert_strand` option is selected.
 
 #### 6. ensembles.bed
 
