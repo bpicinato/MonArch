@@ -2,7 +2,7 @@
 import sys
 
 # function to store the best_hit and search for the second_hit
-def GetCircles(BlastDict, delta, max_circle_size, min_sec_hit_size, min_read_cov, blast_results, invert_strand, strandness):
+def GetCircles(BlastDict, delta, max_circle_size, min_sec_hit_size, min_read_cov, blast_results, invert_strand):
     with open(blast_results+".bed", "w") as outbed:
         with open(blast_results+".info","w") as outinfo:
             # count how many circles are found with each parameter
@@ -44,20 +44,17 @@ def GetCircles(BlastDict, delta, max_circle_size, min_sec_hit_size, min_read_cov
                     all_send = [int(ali['send']) if ali['sstrand'] == best_hit_strand else 0 for ali in alignments ]
 
                     # inverting strand to be written in .bed files
-                    if invert_strand == 'YES' and strandness == 'YES':
+                    if invert_strand == 'YES':
                         if best_hit_strand == 'plus':
                             strand = "-"
                         else:
                             strand = "+"
                     # or keeping it the same
-                    elif strandness == 'YES':
+                    else:
                         if best_hit_strand == 'plus':
                             strand = "+"
                         else:
                             strand = "-"
-
-                    else:
-                        strand = '+'
 
                     # 2) checking each case of "strand" and "half"
                     if best_hit_strand == 'plus' and best_hit_half == "A":
@@ -281,12 +278,11 @@ def main():
     min_read_cov = float(sys.argv[5])
     max_mismatch = int(sys.argv[6])
     invert_strand = sys.argv[7]
-    strandness = sys.argv[8]
     # Parsing results
     BlastDict = ParseBlastResults(blast_results, 250, max_mismatch)
     # Get Circles
     GetCircles(BlastDict, delta, max_circle_size,
-               min_sec_hit_size, min_read_cov, blast_results, invert_strand, strandness)
+               min_sec_hit_size, min_read_cov, blast_results, invert_strand)
 
 if __name__ == '__main__':
         main()

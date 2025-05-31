@@ -41,7 +41,7 @@ Automated pipeline to annotate circular RNAs in RNA-Seq data
                 --output <path/to/output> [--threads INT]
                [--prefix STR] [--max_circle_size INT]
                [--min_read_cov FLOAT] [--max_mismatch INT]
-               [--no_strandness] [--dont_invert_strand]
+               [--dont_invert_strand]
 
 \e[4mRequired arguments\e[0m:
 
@@ -65,10 +65,6 @@ Automated pipeline to annotate circular RNAs in RNA-Seq data
 
  --max_mismatch        Maximum number of mismatches allowed for each alignment
                        (Default = 0)
-
- --no_strandness        Do not consider sequencing protocol stranded. MonArch
-                       default behavior is to consider sequencing protocol stranded.
-                       This paramenter overrides --dont_invert_strand.
 
  --dont_invert_strand  Do not invert input strand. Default behavior of MonArch
                        is to turn 'plus' strand turns into 'minus' and vice versa.
@@ -95,7 +91,7 @@ check_deps(){
 
 # option strings
 SHORT=h
-LONG=help,ref_genome:,reads:,prefix:,max_circle_size:,output:,min_sec_hit_size:,threads:,min_read_cov:,max_mismatch:,dont_invert_strand,no_strandness
+LONG=help,ref_genome:,reads:,prefix:,max_circle_size:,output:,min_sec_hit_size:,threads:,min_read_cov:,max_mismatch:,dont_invert_strand
 
 # read the options
 OPTS=$(getopt --options $SHORT --long $LONG --name "$0" -- "$@")
@@ -109,7 +105,6 @@ MIN_READ_COV=0.9
 PREFIX="circles"
 MAX_MISMATCH=0
 INVERT_STRAND="YES"
-STRANDNESS="YES"
 # hard-coded
 MIN_SEC_HIT_SIZE=8
 DELTA=3
@@ -156,10 +151,6 @@ while true ; do
       INVERT_STRAND="NO"
       shift
       ;;
-    --no_strandness )
-      STRANDNESS="NO"
-      shift
-        ;;
     -- )
       shift
       break
@@ -194,7 +185,6 @@ THREADS: $THREADS
 MAX CIRCLE SIZE: $MAX_CIRCLE_SIZE
 MIN READ COVERAGE: $MIN_READ_COV
 MAX MISMATCH ALLOWED: $MAX_MISMATCH
-STRANDED PROTOCOL: $STRANDNESS
 INVERT STRAND? $INVERT_STRAND
 =========================================================================
 "
@@ -265,7 +255,7 @@ if [[ ! -f "$OUTPUT"/reads00.fa.out.bed && ! -f "$OUTPUT"/"$PREFIX".blastn.tbl.g
 			"$CONDA_PREFIX"/bin/python3 \
 			"$HOME_DIR"/scripts/Monarch-GetJunctions.py "$input" $DELTA \
 			$MAX_CIRCLE_SIZE $MIN_SEC_HIT_SIZE $MIN_READ_COV \
-			$MAX_MISMATCH $INVERT_STRAND $STRANDNESS
+			$MAX_MISMATCH $INVERT_STRAND
 		AUX=$(( AUX + 1 ))
 		log "Step4" "Running part $AUX of $N_FILES...\r"
 	done
