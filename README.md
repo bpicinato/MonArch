@@ -38,37 +38,31 @@ Usage:
  monarch.sh --ref_genome <reference.fasta> --reads <reads1.fasta,reads2.fasta>
                 --output <path/to/output> [--threads INT]
                [--prefix STR] [--max_circle_size INT]
-               [--min_sec_hit_size INT] [--min_read_cov FLOAT]
-               [--max_mismatch INT] [--no_strandness] [--dont_invert_strand]
+               [--min_read_cov FLOAT] [--max_mismatch INT]
+               [--dont_invert_strand]
 
 Required arguments:
 
-  --ref_genome         The reference genome to be used as the subject for BLAST.
+  --ref_genome         The reference genome to be used as subject for blast
 
-  --reads              Reads to be used as the query for BLAST. Or a comma-separated
-                       list of reads, if applicable.
+  --reads              Reads to be used as query for blast. Or a comma separated
+                       list of reads, if applicable
 
-  --output             Path to output directory. It will be created if it does not exist.
+  --output             Path to output dir. Will be created if it does not exist
 
 Optional arguments:
 
- --threads             Number of threads for the analysis (Default = 10).
+ --threads             Number of threads for the analysis (Default = 1)
 
- --prefix              Prefix for files created by MonArch (Default = circles).
+ --prefix              Prefix for files created by MonArch (Default = circles)
 
- --max_circle_size     Maximum circRNA size allowed (Default = 3500).
-
- --min_sec_hit_size    Minimum size of the second hit (Default = 8).
+ --max_circle_size     Maximum circle size (Default = 3500)
 
  --min_read_cov        Minimum read coverage by first and second hits together.
-                       It must be a number between 0 and 1 (0 - 100%) (Default = 0.9).
+                       Must be a number between 0 and 1 (0 - 100%) (Default = 0.9)
 
  --max_mismatch        Maximum number of mismatches allowed for each alignment
-                       (Default = 0).
-
- --no_strandness       Do not consider the sequencing protocol stranded. MonArch
-                       default behavior is to consider the sequencing protocol stranded.
-                       This parameter overrides --dont_invert_strand.
+                       (Default = 0)
 
  --dont_invert_strand  Do not invert input strand. Default behavior of MonArch
                        is to turn 'plus' strand turns into 'minus' and vice versa.
@@ -140,7 +134,7 @@ In the first step, the reads are aligned to the reference genome with BLASTn. Th
 ![FigureS1-1](https://github.com/user-attachments/assets/032154cf-1bd4-4ed7-8d0e-b6b09840118a)
 ***Figure 2**: Details on the MonArch pipeline. (A) Schematic of some MonArch parameters to identify circularization junctions in RNA-Seq reads. Default values are represented. (B) Reads that contain a circularization junction are allowed to have at most a 3nt "overlap" or "gap" between the two halves of the alignment. An overlap (left) occurs when a base (N) can be aligned to either side of the transcript. The final circRNA coordinate always considers that the base came from the 5' portion of the circularized transcript. A gap (right) occurs when there is a base (N) between the two portions of the alignment that does not align to the reference genome.*
 
-The post-processing steps merge circularization junctions in _ensembles_ by `MonArch-PostProcessing.py` and get their sequence with `MonArch-GetJunctionsSeq.py`. Circularization junctions are merged into one ensemble if their start and end coordinates are no further than 3nt from the start and end coordinates of junctions that are already part of that _ensemble_. If the option `--no_strandness` is selected, MonArch will not output the junction sequences.
+The post-processing steps merge circularization junctions in _ensembles_ by `MonArch-PostProcessing.py` and get their sequence with `MonArch-GetJunctionsSeq.py`. Circularization junctions are merged into one ensemble if their start and end coordinates are no further than 3nt from the start and end coordinates of junctions that are already part of that _ensemble_.
 
 # Known issues
 
