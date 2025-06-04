@@ -71,7 +71,7 @@ Optional arguments:
 
 We have provided a small test dataset in the `misc` folder. It will create a `test_output` folder in the `misc` directory. You can run it with:
 ```
-monarch --ref_genome misc/Hsalinarum.fa --reads misc/test_input.fa --output misc/test_output
+bash monarch.sh --ref_genome misc/Hsalinarum.fa --reads misc/test_input.fa --output misc/test_output
 ```
 
 # Outputs
