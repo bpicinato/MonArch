@@ -4,7 +4,7 @@ MonArch is an automated pipeline to annotate circRNAs in RNA-Seq reads. It searc
 
 If you use the contents of this repository, please cite:
 
-Picinato, B. A., Franceschini-Santos, V. H., Zaramela, L., Vêncio, R. Z. N., Koide, T. (2025) **Archaea express circular isoforms of IS200/IS605-associated ωRNAs**. In preparation.
+Picinato, B. A., Franceschini-Santos, V. H., Zaramela, L., Vêncio, R. Z. N., Koide, T. (2025) **Archaea express circular isoforms of IS200/IS605-associated ωRNAs**. In review.
 
 # Installation and requisites
 
