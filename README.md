@@ -76,7 +76,7 @@ bash monarch.sh --ref_genome misc/Hsalinarum.fa --reads misc/test_input.fa --out
 
 # Outputs
 
-MonArch outputs can be divided into three categories: 1) alignment results (BLASTn results), 2) junction results (regarding circularization junctions before joining into _ensembles_), and 3) _ensemble_ results (final results after _ensemble_ formation - see [The Pipeline](#the-pipeline)). 
+MonArch outputs can be divided into three categories: 1) alignment results (BLASTn results), 2) junction results (regarding circularization junctions before joining into _ensembles_, `.junctions` suffix), and 3) _ensemble_ results (final results after _ensemble_ formation, `.ensembles` suffix- see [The Pipeline](#the-pipeline)). 
 
 #### 1. blastn.tbl
 
